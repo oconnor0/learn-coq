@@ -1345,10 +1345,11 @@ Proof.
     to turn in your piece of paper; this is just to encourage you to
     reflect before hacking!) *)
 
+(* simplification *)
 Theorem ble_nat_refl : forall n:nat,
   true = ble_nat n n.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intro n. simpl. reflexivity.
 
 Theorem zero_nbeq_S : forall n:nat,
   beq_nat 0 (S n) = false.
