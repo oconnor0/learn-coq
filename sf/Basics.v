@@ -1372,10 +1372,10 @@ Theorem plus_ble_compat_l : forall n m p : nat,
   ble_nat n m = true -> ble_nat (p + n) (p + m) = true.
 Proof.
   intros n m p. induction p as [| p'].
-  Case "p = 0".
-    simpl. trivial.
+  Case "p = 0". 
+    trivial.
   Case "p = S p'".
-    simpl. rewrite -> IHp'. reflexivity. simpl.
+    simpl. rewrite -> IHp'. reflexivity. trivial. simpl.
 trivial.
  assert (H: ble_nat n m = true).
 admit. 
