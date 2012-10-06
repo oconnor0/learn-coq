@@ -1396,8 +1396,13 @@ Theorem all3_spec : forall b c : bool,
                (negb c))
   = true.
 Proof.
-  intros b c.
-  (* FILL IN HERE *) Admitted.
+  intros b c. destruct b. destruct c.
+  Case "b = true, c = true".
+    simpl. reflexivity.
+  Case "b = true, c = false".
+    simpl. reflexivity.
+  Case "b = false".
+    simpl. reflexivity.  Qed.
 
 (* simplification & rewrites *)
 Theorem mult_plus_distr_r : forall n m p : nat,
