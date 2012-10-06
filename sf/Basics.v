@@ -1371,22 +1371,11 @@ Proof.
 Theorem plus_ble_compat_l : forall n m p : nat, 
   ble_nat n m = true -> ble_nat (p + n) (p + m) = true.
 Proof.
-  intros n m p. induction p as [| p'].
-  Case "p = 0". 
-    trivial.
+  intros n m p H. 
+  induction p as [| p'].
+  Case "p = 0". simpl. rewrite -> H. reflexivity. 
   Case "p = S p'".
-    simpl. rewrite -> IHp'. reflexivity. trivial. simpl.
-trivial.
- assert (H: ble_nat n m = true).
-admit. 
-
-simpl. rewrite -> H. reflexivity. rewrite <- ble_nat_refl. reflexivity.
-
-induction n as [| n']. induction m as [| m'].
-  Case "n = 0, m = 0".
-    rewrite -> plus_0_r. simpl. rewrite <- ble_nat_refl. reflexivity.
-  Case "n = 0, m = S m'".
-    simpl. 
+    simpl. rewrite -> IHp'. reflexivity.  Qed.
 
 Theorem S_nbeq_0 : forall n:nat,
   beq_nat (S n) 0 = false.
