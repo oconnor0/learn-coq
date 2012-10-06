@@ -1377,15 +1377,18 @@ Proof.
   Case "p = S p'".
     simpl. rewrite -> IHp'. reflexivity.  Qed.
 
+(* simplification *)
 Theorem S_nbeq_0 : forall n:nat,
   beq_nat (S n) 0 = false.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros n. simpl. reflexivity.  Qed.
 
+(* simplification *)
 Theorem mult_1_l : forall n:nat, 1 * n = n.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros n. simpl. rewrite -> plus_0_r. reflexivity.  Qed.
 
+(* deconstruction *)
 Theorem all3_spec : forall b c : bool,
     orb
       (andb b c)
@@ -1393,17 +1396,28 @@ Theorem all3_spec : forall b c : bool,
                (negb c))
   = true.
 Proof.
+  intros b c.
   (* FILL IN HERE *) Admitted.
 
+(* simplification & rewrites *)
 Theorem mult_plus_distr_r : forall n m p : nat,
   (n + m) * p = (n * p) + (m * p).
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros n m p. induction n as [| n'].
+  Case "n = 0".
+    simpl. reflexivity.
+  Case "n = S n'".
+    simpl. rewrite -> IHn'. rewrite -> plus_assoc. reflexivity.  Qed.
 
+(* simplification & rewrites *)
 Theorem mult_assoc : forall n m p : nat,
   n * (m * p) = (n * m) * p.
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros n m p. induction n as [| n'].
+  Case "n = 0".
+    simpl. reflexivity.
+  Case "n = S n'".
+    simpl. rewrite -> IHn'. rewrite -> mult_plus_distr_r. reflexivity.  Qed.
 (** [] *)
 
 (** **** Exercise: 2 stars, optional (plus_swap') *)
