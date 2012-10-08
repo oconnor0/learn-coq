@@ -1440,7 +1440,10 @@ Proof.
 Theorem plus_swap' : forall n m p : nat, 
   n + (m + p) = m + (n + p).
 Proof.
-  (* FILL IN HERE *) Admitted.
+  intros n m p.
+  rewrite -> plus_assoc. rewrite -> plus_assoc.
+  replace (n + m) with (m + n).
+  reflexivity. rewrite -> plus_comm. reflexivity.  Qed.
 (** [] *)
 
 
@@ -1520,7 +1523,23 @@ Qed.
         converting it to unary and then incrementing.  
 *)
 
-(* FILL IN HERE *)
+Inductive bin : Type :=
+  | Z : bin
+  | T : bin -> bin
+  | I : bin -> bin.
+
+Fixpoint bin_to_nat (m : bin) : nat :=
+  match m with 
+  | Z => (O : nat)
+  | T b => 2 * (bin_to_nat b)
+  | I b => 2 * (bin_to_nat b) + 1
+  end.
+
+Eval simpl in (T Z).
+Eval simpl in (bin_to_nat (I Z)).
+Eval simpl in (bin_to_nat (T (I Z))).
+Eval simpl in (bin_to_nat (T (T Z))).
+
 (** [] *)
 
 (** **** Exercise: 5 stars (binary_inverse) *)
